@@ -43,10 +43,12 @@ def start_video(filepath):
         filepath (str): The path of the video to play
 
     """
+    if not check_display_enabled():
+        enable_display()
+
     # Kill current mpv process
     #subprocess.run(["pkill", "mpv"])
     print("pkill mpv")
     # Start new mpv using file
     #subprocess.run(["mpv", filepath, "--loop", inf"])
     print(f"mpv {filepath} --loop inf")
-

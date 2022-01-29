@@ -49,17 +49,33 @@ def write_repository_to_tags(num_tags):
     """
     ids = list(id_fname_map.keys())
     reader = SimpleMFRC522()
+    written_tag_ids = set()
 
     for i in range(num_tags):
         tag_number = i + 1
+        print("Available IDs:")
         for t in enumerate(ids):
-            print(f"{t[0]}: {t[1]}")
+            print(f"  {t[0]}) {t[1]}")
 
         print()
-        id_index_to_write = int(input(f"Enter number of ID to write to tag #{tag_number}: "))
+        id_index_to_write = int(input(f"({tag_number}/{num_tags}) Enter number of ID to write to tag: "))
         id_to_write = ids[id_index_to_write]
-        print(f"Tap tag #{tag_number}")
-        reader.write(id_to_write)
-        print(f"Successfully wrote '{id_to_write}' to tag #{tag_number}")
+        print(f"({tag_number}/{num_tags}) Tap tag to reader.")
+
+        tag_id = reader.read_id()
+
+        while tag_id in written_tag_ids:
+            print(f"This tag (ID {tag_id}) has already been written to during this session.")
+            confirm = input("Write anyway? [y/n]: ")
+            if "y" in confirm.lower():    
+                print(f"({tag_number}/{num_tags}) Tap tag to reader.") 
+                break
+            print("Tap a different tag.")
+            tag_id = reader.read_id()
+
+        written_id, written_data = reader.write(id_to_write)
+        written_tag_ids.add(tag_id)
+        print(f"Successfully wrote '{written_data}' to tag (ID {written_id})")
         ids.remove(id_to_write)
+        written_tag_ids.add(written_id)
 

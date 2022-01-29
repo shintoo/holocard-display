@@ -52,12 +52,6 @@ def start_display(poll_rate):
     """
     print("Starting holocard-display")
 
-
-    display_enabled = display_control.check_display_enabled()
-
-    if not display_enabled:
-        display_control.enable_display()
-
     try:
         configure_io()
         pass
@@ -74,13 +68,8 @@ def start_display(poll_rate):
 
 def main(argv):
     if "--write_tags" in argv:
-        try:
-            num_tags = int(argv[argv.index("--write_tags") + 1])
-            write_repository_to_tags(num_tags)
-        except Exception as e:
-            print(f"Error writing NFC tags: {e}")
-            return
-
+        num_tags = int(argv[argv.index("--write_tags") + 1])
+        write_repository_to_tags(num_tags)
         print("Completed writing NFC tags")
         return
 
@@ -99,6 +88,8 @@ if __name__ == "__main__":
     try:
         import sys
         main(sys.argv)
+    except KeyboardInterrupt as e:
+        print(f"\b\bQuitting")
     except Exception as e:
         print(f"Error during execution: {e}")
 
