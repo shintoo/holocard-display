@@ -1,0 +1,15 @@
+[project]
+name = "holocard-display"
+version = "0.0.1"
+description: "Controls video playback using NFC tags"
+authors = [
+  "Sean Rapp <seanprapp@gmail.com>"
+]
+license = "GPLv3"
+repository="https://github.com/shintoo/holocard-display"
+
+# Requirements
+[dependencies]
+spidev = "^3.5.0"
+mfrc522 = "^0.0.7"
+RPi = "^0.0.1"
