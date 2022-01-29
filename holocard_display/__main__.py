@@ -42,11 +42,21 @@ def configure_io():
     )
 
 
-def start_display(argv):
-    """Starts the display"""
-    poll_rate = 2
-
+def start_display(poll_rate):
+    """
+    Starts the display and NFC handlers.
+    
+    Args:
+        poll_rate (float): Rate in Hz at which to poll the NFC reader
+    
+    """
     print("Starting holocard-display")
+
+
+    display_enabled = display_control.check_display_enabled()
+
+    if not display_enabled:
+        display_control.enable_display()
 
     try:
         configure_io()
@@ -74,13 +84,15 @@ def main(argv):
         print("Completed writing NFC tags")
         return
 
+    poll_rate = 2
+
     if "--poll_rate" in argv:
         try:
             poll_rate = float(argv[argv.index("--poll_rate") + 1])
         except:
             print("Defaulting to poll rate of 2Hz")
 
-    start_display(argv)
+    start_display(poll_rate)
 
 
 if __name__ == "__main__":
