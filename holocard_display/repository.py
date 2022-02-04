@@ -36,7 +36,7 @@ def get_path_from_id(identifier):
         print(message)
         raise ValueError(message)
 
-    path = root_path + id_fname_map[identifier]
+    path = root_path + "/" + id_fname_map[identifier]
     return path
 
 

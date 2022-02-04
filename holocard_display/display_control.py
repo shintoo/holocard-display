@@ -54,5 +54,5 @@ def start_video(filepath):
     print("pkill mpv")
     pkill.wait()
     # Start new mpv using file
-    print(f"mpv {filepath} --loop inf")
-    subprocess.Popen(["mpv", filepath, "--loop", "inf", "--script-opts=osc-visibility=never"])
+    print(f"mpv {filepath} --loop=inf")
+    subprocess.Popen(["mpv", filepath, "--loop=inf", "--script-opts=osc-visibility=never", "--vo=sdl"])
