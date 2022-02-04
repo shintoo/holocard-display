@@ -31,6 +31,10 @@ def nfc_read_handler(nfc_id, nfc_data):
     # Trim whitespace
     cleaned_data = nfc_data.strip()
 
+    if len(cleaned_data) == 0:
+        print("Got empty NFC data (could be erratic read)")
+        return
+
     # Check that video needs to be changed
     if cleaned_data == current_playing_id:
         print("Same ID as currently playing, doing nothing")

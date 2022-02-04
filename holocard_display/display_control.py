@@ -11,7 +11,7 @@ from multiprocessing import Process, Event
 
 display = "HDMI"
 
-test_enabled = False
+test_enabled = True
 
 def check_display_enabled():
     """Returns True if the display is enabled, False otherwise."""
@@ -32,6 +32,9 @@ def disable_display():
     """Disable the display (turn it off)"""
     global test_enabled
     test_enabled = False
+    # Kill current mpv process
+    #subprocess.run(["pkill", "mpv"])
+    print("pkill mpv") 
     #subprocess.run(["xrandr", display, "--off"])
     print("xrandr <display> --off")
 
@@ -47,8 +50,9 @@ def start_video(filepath):
         enable_display()
 
     # Kill current mpv process
-    #subprocess.run(["pkill", "mpv"])
+    pkill = subprocess.Popen(["pkill", "mpv"])
     print("pkill mpv")
+    pkill.wait()
     # Start new mpv using file
-    #subprocess.run(["mpv", filepath, "--loop", inf"])
     print(f"mpv {filepath} --loop inf")
+    subprocess.Popen(["mpv", filepath, "--loop", "inf", "--script-opts=osc-visibility=never"])

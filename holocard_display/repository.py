@@ -9,11 +9,13 @@ Date: 01-29-2022
 
 from mfrc522 import SimpleMFRC522
 
-root_path = "/home/pi/Documents/Projects/holocard-display/holocard_display/repository/"
+root_path = "/home/pi/Documents/Projects/holocard-display/assets/video"
 id_fname_map = {
-        "holocard-display:sts-orbiter": "orbiter.mkv",
+        "holocard-display:sts-orbiter": "shuttle.mkv",
         "holocard-display:ingenuity": "ingenuity.mkv",
-        "holocard-display:tiefighter": "tiefighter.mkv",
+        "holocard-display:starfighter": "starfighter.mkv",
+        "holocard-display:enterprise": "enterprise.mkv",
+        "holocard-display:blackbird": "sr71.mkv",
 }
 
 def get_path_from_id(identifier):

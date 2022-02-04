@@ -73,13 +73,13 @@ def main(argv):
         print("Completed writing NFC tags")
         return
 
-    poll_rate = 2
+    poll_rate = 0.5
 
     if "--poll_rate" in argv:
         try:
             poll_rate = float(argv[argv.index("--poll_rate") + 1])
         except:
-            print("Defaulting to poll rate of 2Hz")
+            print("Defaulting to poll rate of 0.5Hz")
 
     start_display(poll_rate)
 
@@ -92,5 +92,6 @@ if __name__ == "__main__":
         print(f"\b\bQuitting")
     except Exception as e:
         print(f"Error during execution: {e}")
+        raise e
 
     GPIO.cleanup()
