@@ -2,8 +2,8 @@ holocard-display
 
 Controls video playback on a display using NFC tags.
 
-[render1](assets/mockup/forward-housing.png)
-[render2](assets/mockup/reverse-no-housing.png)
+![render1](assets/mockup/forward-housing.png)
+![render2](assets/mockup/reverse-no-housing.png)
 
 I use this for what is basically a desk toy; several NFC cards are labelled with different
 spacecraft, and a simple "hologram" is made with the display using a CD case cover glass.
